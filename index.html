@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NFG Portfolio</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: #000;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    #particles-js {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      z-index: 1;
+    }
+
+    .top-left-text {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 1.5em;
+      color: #1e90ff; /* Initial color */
+      z-index: 3;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+      transition: color 0.5s ease;
+    }
+
+    .top-left-text:hover {
+      color: #00b7eb;
+    }
+
+    .hamburger-menu {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 3;
+      cursor: pointer;
+    }
+
+    .hamburger-icon {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 30px;
+      height: 20px;
+    }
+
+    .hamburger-icon span {
+      width: 100%;
+      height: 3px;
+      background-color: #1e90ff; /* Initial color */
+      transition: all 0.3s ease;
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 40px;
+      right: 0;
+      background-color: #1e90ff; /* Initial color */
+      border-radius: 5px;
+      z-index: 3;
+      transition: background-color 0.5s ease;
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 10px 20px;
+      color: #fff;
+      text-decoration: none;
+      font-size: 1em;
+      transition: background 0.3s;
+    }
+
+    .dropdown-menu a:hover {
+      background-color: #00b7eb;
+    }
+
+    .container {
+      text-align: center;
+      z-index: 2;
+    }
+
+    .container h1 {
+      font-size: 1.5em;
+      margin-bottom: 10px;
+    }
+
+    .container .white-text {
+      color: #fff;
+    }
+
+    .container .blue-text {
+      color: #00b7eb; /* Initial color */
+      transition: color 0.5s ease;
+    }
+
+    .container h2 {
+      font-size: 1.5em;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+
+    .container .typed-text {
+      color: #00b7eb; /* Initial color */
+      transition: color 0.5s ease;
+    }
+
+    .container .white-text-typed {
+      color: #fff;
+    }
+
+    .container .description {
+      font-size: 0.8em;
+      color: #fff;
+      margin-top: 60px;
+      max-width: 300px;
+      line-height: 1.4;
+    }
+
+    .container .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      border: 2px solid #00b7eb; /* Initial color */
+      border-radius: 25px;
+      color: #00b7eb; /* Initial color */
+      text-decoration: none;
+      font-size: 1.2em;
+      margin-top: 40px;
+      transition: background 0.3s, color 0.3s, border-color 0.5s ease;
+    }
+
+    .container .btn:hover {
+      background: #00b7eb;
+      color: #000;
+    }
+
+    .profile-img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      margin-bottom: 20px;
+      border: 2px solid #00b7eb; /* Initial color */
+      background: #fff;
+      transition: transform 2s ease-in-out, border-color 0.5s ease;
+      animation: float 3s ease-in-out infinite;
+      cursor: pointer;
+    }
+
+    .profile-img:hover {
+      transform: scale(1.05);
+    }
+
+    .social-links {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .social-links a {
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+
+    .social-links a:hover {
+      transform: scale(1.2);
+    }
+
+    .social-links img {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+  </style>
+</head>
+<body>
+  <div id="particles-js"></div>
+
+  <!-- Top-left clickable typed text -->
+  <a href="https://t.me/Adarsh_modder" target="_blank" class="top-left-text">
+    <span id="typed-top"></span>
+  </a>
+
+  <!-- Hamburger Menu -->
+  <div class="hamburger-menu" onclick="toggleMenu()">
+    <div class="hamburger-icon">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <div class="dropdown-menu" id="dropdownMenu">
+      <a href="https://t.me/nfg_mod" target="_blank">Channel</a>
+      <a href="https://t.me/Adarsh_modder" target="_blank">Contact</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- Profile image with link -->
+    <a href="https://t.me/nfg_mod" target="_blank">
+      <img src="https://i.ibb.co/5xJB6Y3c/1000083874.jpg" alt="Profile" class="profile-img" />
+    </a>
+
+    <h1><span class="white-text">Hi, It's </span><span class="blue-text">NFG</span></h1>
+    <h2><span class="white-text-typed">I'm a</span> <span class="typed-text" id="typed-text"></span></h2>
+
+    <p class="description">
+      I am an ordinary person who likes things related to technology and happens to be lucky to have a little experience about technology and others. Even though I only learned using autodidactic methods because of a reason that required me to do so :)
+    </p>
+
+    <a href="https://nfg-mocha.vercel.app/" target="_blank" class="btn">See More</a>
+
+    <!-- Social Media Links -->
+    <div class="social-links">
+      <a href="https://t.me/nfg_mod" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" />
+      </a>
+      <a href="https://www.instagram.com/rao_sahab_000998?igsh=MWIwZmptY3VwdzBqaw==" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" />
+      </a>
+    </div>
+  </div>
+
+  <!-- Background music -->
+  <audio autoplay loop hidden>
+    <source src="https://vocaroo.com/media_command.php?media=s0uAk1Gc5SYU&command=download_mp3" type="audio/mpeg" />
+  </audio>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  <script>
+    // Function to generate random color
+    function getRandomColor() {
+      const letters = '0123456789ABCDEF';
+      let color = '#';
+      for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    }
+
+    // Function to update theme colors
+    function updateColors() {
+      const newColor = getRandomColor();
+
+      // Update particles color
+      particlesJS("particles-js", {
+        particles: {
+          number: { value: 80, density: { enable: true, value_area: 800 } },
+          color: { value: newColor },
+          shape: { type: "circle", stroke: { width: 0, color: "#000000" } },
+          opacity: { value: 0.5 },
+          size: { value: 3, random: true },
+          line_linked: {
+            enable: true,
+            distance: 150,
+            color: newColor,
+            opacity: 0.4,
+            width: 1,
+          },
+          move: {
+            enable: true,
+            speed: 6,
+            direction: "none",
+            random: false,
+            straight: false,
+            out_mode: "out",
+            bounce: false,
+          },
+        },
+        interactivity: {
+          detect_on: "canvas",
+          events: {
+            onhover: { enable: true, mode: "repulse" },
+            onclick: { enable: true, mode: "push" },
+            resize: true,
+          },
+          modes: {
+            repulse: { distance: 100, duration: 0.4 },
+            push: { particles_nb: 4 },
+          },
+        },
+        retina_detect: true,
+      });
+
+      // Update theme colors
+      document.querySelector('.top-left-text').style.color = newColor;
+      document.querySelectorAll('.hamburger-icon span').forEach(span => {
+        span.style.backgroundColor = newColor;
+      });
+      document.querySelector('.dropdown-menu').style.backgroundColor = newColor;
+      document.querySelector('.btn').style.borderColor = newColor;
+      document.querySelector('.btn').style.color = newColor;
+      document.querySelector('.profile-img').style.borderColor = newColor;
+      document.querySelector('.blue-text').style.color = newColor;
+      document.querySelector('.typed-text').style.color = newColor;
+    }
+
+    // Initial particle and theme setup
+    updateColors();
+
+    // Change colors every 2 seconds
+    setInterval(updateColors, 2000);
+
+    // Typed animation for top-left text
+    var typedTop = new Typed("#typed-top", {
+      strings: ["NFG 領先"],
+      typeSpeed: 150,
+      backSpeed: 0,
+      showCursor: false,
+      loop: true,
+      backDelay: 2000,
+      fadeOut: true,
+      fadeOutDelay: 1000,
+    });
+
+    // Typed animation for main typed text
+    var typed = new Typed("#typed-text", {
+      strings: ["Web Developer", "Modder", "Application Developer"],
+      typeSpeed: 50,
+      backSpeed: 30,
+      backDelay: 1000,
+      loop: true,
+    });
+
+    // Toggle dropdown menu
+    function toggleMenu() {
+      var dropdown = document.getElementById("dropdownMenu");
+      if (dropdown.style.display === "block") {
+        dropdown.style.display = "none";
+      } else {
+        dropdown.style.display = "block";
+      }
+    }
+  </script>
+</body>
+</html>
