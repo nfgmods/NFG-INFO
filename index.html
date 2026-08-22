@@ -4,9 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>NFG Portfolio</title>
-  <!-- Font Awesome CDN for WhatsApp and Instagram icons -->
+  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
   <style>
+    /* --- ORIGINAL HOME PAGE STYLE (RETAINED) --- */
     body {
       margin: 0;
       padding: 0;
@@ -39,10 +40,6 @@
       text-decoration: none;
       font-weight: bold;
       cursor: pointer;
-    }
-
-    .top-left-text:hover {
-      color: #00b7eb;
     }
 
     .hamburger-menu {
@@ -84,11 +81,6 @@
       color: #fff;
       text-decoration: none;
       font-size: 1em;
-      transition: background 0.3s;
-    }
-
-    .dropdown-menu a:hover {
-      background-color: #00b7eb;
     }
 
     .container {
@@ -96,57 +88,40 @@
       z-index: 2;
     }
 
-    .container h1 {
-      font-size: 1.5em;
-      margin-bottom: 10px;
-    }
+    .container h1 { font-size: 1.5em; margin-bottom: 10px; }
+    .blue-text { color: #00b7eb; }
 
-    .container .white-text {
-      color: #fff;
-    }
-
-    .container .blue-text {
-      color: #00b7eb;
-    }
-
-    .container h2 {
-      font-size: 1.5em;
-      margin-bottom: 10px;
-      color: #fff;
-    }
-
-    .container .typed-text {
-      color: #00b7eb;
-    }
-
-    .container .white-text-typed {
-      color: #fff;
-    }
-
-    .container .description {
+    .description {
       font-size: 0.8em;
       color: #fff;
-      margin-top: 60px;
+      margin-top: 40px;
       max-width: 300px;
       line-height: 1.4;
+      margin-left: auto;
+      margin-right: auto;
     }
 
-    .container .btn {
+    .btn-group {
+      margin-top: 40px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .btn {
       display: inline-block;
       padding: 10px 20px;
       border: 2px solid #00b7eb;
       border-radius: 25px;
       color: #00b7eb;
       text-decoration: none;
-      font-size: 1.2em;
-      margin-top: 40px;
-      transition: background 0.3s, color 0.3s;
+      font-size: 1.1em;
+      transition: 0.3s;
+      background: transparent;
+      cursor: pointer;
     }
 
-    .container .btn:hover {
-      background: #00b7eb;
-      color: #000;
-    }
+    .btn:hover { background: #00b7eb; color: #000; }
 
     .profile-img {
       width: 150px;
@@ -155,13 +130,7 @@
       margin-bottom: 20px;
       border: 2px solid #00b7eb;
       background: #fff;
-      transition: transform 2s ease-in-out;
       animation: float 3s ease-in-out infinite;
-      cursor: pointer;
-    }
-
-    .profile-img:hover {
-      transform: scale(1.05);
     }
 
     @keyframes float {
@@ -170,7 +139,6 @@
       100% { transform: translateY(0px); }
     }
 
-    /* Social icons styles with animations */
     .social-icons {
       margin-top: 20px;
       display: flex;
@@ -178,45 +146,108 @@
       gap: 20px;
     }
 
-    .social-icons a {
-      color: #00b7eb;
-      font-size: 2em;
-      transition: all 0.3s ease;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: slideIn 0.5s ease forwards;
+    .social-icons a { color: #00b7eb; font-size: 2em; transition: 0.3s; }
+    .social-icons a:hover { transform: scale(1.2); }
+
+    /* --- PREMIUM VERTICAL MODAL WITH SNOW --- */
+    #project-modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 100;
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(10px);
+      overflow: hidden; /* Snow stays inside */
     }
 
-    .social-icons a:nth-child(1) { animation-delay: 0.2s; }
-    .social-icons a:nth-child(2) { animation-delay: 0.4s; }
+    /* Snowflake CSS */
+    .snowflake {
+      position: absolute;
+      top: -10px;
+      background: #fff;
+      border-radius: 50%;
+      opacity: 0.6;
+      pointer-events: none;
+      z-index: 1;
+      animation: fall linear infinite;
+    }
 
-    .social-icons a:hover {
-      color: #1e90ff;
-      transform: scale(1.2) rotate(10deg);
+    @keyframes fall {
+      to { transform: translateY(105vh); }
+    }
+
+    .modal-content {
+      background: rgba(10, 10, 10, 0.8);
+      width: 90%;
+      max-width: 400px;
+      border-radius: 20px;
+      border: 1px solid #00b7eb;
+      padding: 25px;
+      box-shadow: 0 0 40px rgba(0, 183, 235, 0.3);
+      z-index: 10; /* Above Snow */
+      position: relative;
+      animation: slideIn 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28);
     }
 
     @keyframes slideIn {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { transform: translateY(30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .modal-header { text-align: left; margin-bottom: 20px; border-bottom: 1px solid #222; padding-bottom: 10px; }
+
+    .project-list { display: flex; flex-direction: column; gap: 12px; }
+
+    .project-item {
+      display: flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 15px;
+      border-radius: 15px;
+      text-decoration: none;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: 0.3s;
+    }
+
+    .project-item:hover {
+      background: rgba(0, 183, 235, 0.1);
+      border-color: #00b7eb;
+      transform: translateX(8px);
+    }
+
+    .project-item i { font-size: 1.4em; color: #00b7eb; margin-right: 15px; width: 30px; text-align: center; }
+
+    .project-info span { display: block; font-weight: bold; color: #fff; font-size: 0.95em; }
+    .project-info small { color: #888; font-size: 0.75em; }
+
+    .coming-soon { opacity: 0.5; cursor: default; }
+
+    .close-btn {
+      margin-top: 25px;
+      display: block;
+      color: #ff4d4d;
+      font-size: 0.8em;
+      cursor: pointer;
+      text-transform: uppercase;
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-align: center;
     }
   </style>
 </head>
 <body>
   <div id="particles-js"></div>
 
-  <!-- Top-left clickable typed text (WhatsApp link updated) -->
   <a href="https://wa.me/qr/CQEQVW7W2IXCE1" target="_blank" class="top-left-text">
     <span id="typed-top"></span>
   </a>
 
-  <!-- Hamburger Menu -->
   <div class="hamburger-menu" onclick="toggleMenu()">
     <div class="hamburger-icon">
-      <span></span>
-      <span></span>
-      <span></span>
+      <span></span><span></span><span></span>
     </div>
     <div class="dropdown-menu" id="dropdownMenu">
       <a href="https://www.instagram.com/adarshyadav_000111/" target="_blank">Insta</a>
@@ -224,110 +255,122 @@
     </div>
   </div>
 
-  <div class="container">
-    <!-- Profile image with link -->
+  <div class="container" id="main-container">
     <a href="https://www.instagram.com/adarshyadav_000111/" target="_blank">
       <img src="https://i.ibb.co/5xJB6Y3c/1000083874.jpg" alt="Profile" class="profile-img" />
     </a>
 
-    <h1><span class="white-text">Hi, It's </span><span class="blue-text">ADARSH</span></h1>
-    <h2><span class="white-text-typed">I'm a</span> <span class="typed-text" id="typed-text"></span></h2>
+    <h1><span style="color:#fff">Hi, It's </span><span class="blue-text">ADARSH</span></h1>
+    <h2><span style="color:#fff">I'm a</span> <span class="blue-text" id="typed-text"></span></h2>
 
     <p class="description">
-      I am an ordinary person who likes things related to technology and happens to be lucky to have a little experience about technology and others. Even though I only learned using autodidactic methods because of a reason that required me to do so :)
+      I am an ordinary person who likes things related to technology and happens to be lucky to have a little experience.
     </p>
 
-    <a href="https://adarsh-yadav.vercel.app/" target="_blank" class="btn">See More</a>
+    <div class="btn-group">
+      <a href="https://adarsh-yadav.vercel.app/" target="_blank" class="btn">See More</a>
+      <button class="btn" onclick="openProjects()">My Project</button>
+    </div>
 
-    <!-- Social media icons (Telegram changed to WhatsApp) -->
     <div class="social-icons">
-      <a href="https://wa.me/qr/CQEQVW7W2IXCE1" target="_blank" title="WhatsApp">
-        <i class="fab fa-whatsapp"></i>
-      </a>
-      <a href="https://www.instagram.com/adarshyadav_000111/" target="_blank" title="Instagram">
-        <i class="fab fa-instagram"></i>
-      </a>
+      <a href="https://wa.me/qr/CQEQVW7W2IXCE1" target="_blank"><i class="fab fa-whatsapp"></i></a>
+      <a href="https://www.instagram.com/adarshyadav_000111/" target="_blank"><i class="fab fa-instagram"></i></a>
     </div>
   </div>
 
-  <!-- Background music -->
+  <!-- PROJECT MODAL -->
+  <div id="project-modal">
+    <!-- Modal Content -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 style="margin:0; font-size: 1.2em;">My <span class="blue-text">Projects</span></h2>
+      </div>
+      
+      <div class="project-list">
+        <a href="https://schools-adarsh.vercel.app/" target="_blank" class="project-item">
+          <i class="fas fa-university"></i>
+          <div class="project-info">
+            <span>School Management Sys</span>
+            <small>Live Project • Visit Now</small>
+          </div>
+        </a>
+        <div class="project-item coming-soon">
+          <i class="fas fa-code-branch"></i>
+          <div class="project-info"><span>Coming Soon</span><small>Development phase</small></div>
+        </div>
+        <div class="project-item coming-soon">
+          <i class="fas fa-robot"></i>
+          <div class="project-info"><span>Coming Soon</span><small>AI project in works</small></div>
+        </div>
+        <div class="project-item coming-soon">
+          <i class="fas fa-terminal"></i>
+          <div class="project-info"><span>Coming Soon</span><small>Scripting phase</small></div>
+        </div>
+      </div>
+
+      <div class="close-btn" onclick="closeProjects()">[ Close Menu ]</div>
+    </div>
+  </div>
+
   <audio autoplay loop hidden>
     <source src="https://vocaroo.com/media_command.php?media=s0uAk1Gc5SYU&command=download_mp3" type="audio/mpeg" />
   </audio>
 
-  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
   <script>
-    // Particle effect
     particlesJS("particles-js", {
       particles: {
-        number: { value: 80, density: { enable: true, value_area: 800 } },
+        number: { value: 80 },
         color: { value: "#00b7eb" },
-        shape: { type: "circle", stroke: { width: 0, color: "#000000" } },
         opacity: { value: 0.5 },
         size: { value: 3, random: true },
-        line_linked: {
-          enable: true,
-          distance: 150,
-          color: "#00b7eb",
-          opacity: 0.4,
-          width: 1,
-        },
-        move: {
-          enable: true,
-          speed: 6,
-          direction: "none",
-          random: false,
-          straight: false,
-          out_mode: "out",
-          bounce: false,
-        },
-      },
-      interactivity: {
-        detect_on: "canvas",
-        events: {
-          onhover: { enable: true, mode: "repulse" },
-          onclick: { enable: true, mode: "push" },
-          resize: true,
-        },
-        modes: {
-          repulse: { distance: 100, duration: 0.4 },
-          push: { particles_nb: 4 },
-        },
-      },
-      retina_detect: true,
+        line_linked: { enable: true, distance: 150, color: "#00b7eb", opacity: 0.4, width: 1 },
+        move: { enable: true, speed: 4 }
+      }
     });
 
-    // Typed animation for top-left text
-    var typedTop = new Typed("#typed-top", {
-      strings: ["NFG 領先"],
-      typeSpeed: 150,
-      backSpeed: 0,
-      showCursor: false,
-      loop: true,
-      backDelay: 2000,
-      fadeOut: true,
-      fadeOutDelay: 1000,
+    new Typed("#typed-top", {
+      strings: ["NFG 領先"], typeSpeed: 150, backSpeed: 0, loop: true, showCursor: false
     });
 
-    // Typed animation for main typed text
-    var typed = new Typed("#typed-text", {
-      strings: ["Web Developer", "Modder", "Application Developer"],
-      typeSpeed: 50,
-      backSpeed: 30,
-      backDelay: 1000,
-      loop: true,
+    new Typed("#typed-text", {
+      strings: ["Web Developer", "Modder", "App Developer"], typeSpeed: 50, backSpeed: 30, loop: true
     });
 
-    // Toggle dropdown menu
     function toggleMenu() {
       var dropdown = document.getElementById("dropdownMenu");
-      if (dropdown.style.display === "block") {
-        dropdown.style.display = "none";
-      } else {
-        dropdown.style.display = "block";
+      dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
+    }
+
+    // SNOW EFFECT LOGIC
+    function createSnow() {
+      const modal = document.getElementById('project-modal');
+      for (let i = 0; i < 30; i++) {
+        let flake = document.createElement('div');
+        flake.className = 'snowflake';
+        let size = Math.random() * 4 + 2 + 'px';
+        flake.style.width = size;
+        flake.style.height = size;
+        flake.style.left = Math.random() * 100 + 'vw';
+        flake.style.animationDuration = Math.random() * 3 + 2 + 's';
+        flake.style.animationDelay = Math.random() * 2 + 's';
+        modal.appendChild(flake);
       }
+    }
+
+    function openProjects() {
+      document.getElementById("project-modal").style.display = "flex";
+      document.getElementById("main-container").style.filter = "blur(10px)";
+      createSnow(); // Start Snow
+    }
+
+    function closeProjects() {
+      document.getElementById("project-modal").style.display = "none";
+      document.getElementById("main-container").style.filter = "blur(0px)";
+      // Remove snow to save performance
+      const flakes = document.querySelectorAll('.snowflake');
+      flakes.forEach(f => f.remove());
     }
   </script>
 </body>
